@@ -12,7 +12,6 @@ function HomePage() {
   const [records, setRecords] = useState([]);
   const [totals, setTotals] = useState({ income: 0, expense: 0 });
 
-  // Fetch records from the API
   const fetchRecords = async () => {
     try {
       const res = await fetch("/api/records", { method: "GET", cache: "no-store" });
@@ -25,7 +24,7 @@ function HomePage() {
     }
   };
 
-  // Calculate totals
+
   const calculateTotals = () => {
     const income = records
       .filter((record) => record.type === "income")
@@ -36,7 +35,6 @@ function HomePage() {
     setTotals({ income, expense });
   };
 
-  // Update task status
   const updateStatus = async (id, currentStatus) => {
     try {
       const res = await fetch(`/api/records/${id}`, {
@@ -48,7 +46,7 @@ function HomePage() {
       });
 
       if (!res.ok) throw new Error("Failed to update record status");
-      fetchRecords(); // Refresh records
+      fetchRecords();
     } catch (error) {
       console.error("Error updating record status:", error);
     }
@@ -83,8 +81,6 @@ function HomePage() {
         </div>
         <RecordList records={ records} updateStatus={updateStatus} />
         <diV></diV>
-       
- 
       </main>
     </div>
   );
